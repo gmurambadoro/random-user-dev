@@ -17,7 +17,18 @@ const App = () => {
             .then(data => setPerson({...data}))
             .finally(() => NProgress.done())
         ;
-    }, [person]);
+    }, []);
+
+    const handleCriteriaChanged = (params) => {
+        NProgress.start();
+
+        randomPerson(params)
+            .then(data => setPerson({...data}))
+            .finally(() => NProgress.done())
+        ;
+    };
+
+    console.log(person);
 
     return (
         <BrowserRouter>
@@ -26,7 +37,7 @@ const App = () => {
             <Container>
                 <Row>
                     <Col md={3}>
-                        <PersonForm />
+                        <PersonForm handleCriteriaChanged={handleCriteriaChanged} />
                     </Col>
 
                     <Col>

@@ -3,14 +3,17 @@ import queryString from "query-string";
 
 export const NATIONALITIES = 'AU, BR, CA, CH, DE, DK, ES, FI, FR, GB, IE, IR, NO, NL, NZ, TR, US'.split(', ');
 
+const CORS_HEROKU_BASE_URL = 'https://cors-anywhere.herokuapp.com/';
+
 const instance = axios.create({
-    baseURL: 'https://randomuser.me/api/',
+    baseURL: `${CORS_HEROKU_BASE_URL}https://randomuser.me/api/`,
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+    },
 });
 
 export const randomPerson = async (params = {}) => {
-    params['noinfo'] = true;
-
-    return instance.get(`/?${queryString.stringify(params)}`)
+    return instance.get(`/?${queryString.stringify(params)}&noinfo`)
         .then(response => response.data)
         .then(data => {
             const {results = {}} = data;
