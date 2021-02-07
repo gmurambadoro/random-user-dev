@@ -32,7 +32,7 @@ const PersonForm = (props) => {
             <Form.Group>
                 <Form.Label>Country:</Form.Label>
                 <Form.Control as={"select"} value={country} onChange={event => setCountry(event.target.value)}>
-                    {nationalities.map(nationality => <option key={nationality} value={nationality}>{getCountryName(nationality)}</option> )}
+                    {nationalities.map(nationality => <option key={nationality} value={nationality}>{nationality.toUpperCase() === 'ANY' ? 'ANY' : getCountryName(nationality)}</option> )}
                 </Form.Control>
             </Form.Group>
 
