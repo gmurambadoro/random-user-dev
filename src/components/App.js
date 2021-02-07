@@ -10,23 +10,17 @@ import {randomPerson} from "../services/random-user-api";
 const App = () => {
     const [person, setPerson] = useState({});
 
-    useEffect(() => {
-        NProgress.start();
-
-        randomPerson()
-            .then(data => setPerson({...data}))
-            .finally(() => NProgress.done())
-        ;
-    }, []);
-
-    const handleCriteriaChanged = (params) => {
+    const loadPerson = (params = {}) => {
         NProgress.start();
 
         randomPerson(params)
             .then(data => setPerson({...data}))
-            .finally(() => NProgress.done())
-        ;
+            .finally(() => NProgress.done());
     };
+
+    useEffect(() => loadPerson(), []);
+
+    const handleCriteriaChanged = (params) => loadPerson(params);
 
     console.log(person);
 
@@ -34,7 +28,7 @@ const App = () => {
         <BrowserRouter>
             <Header />
 
-            <Container>
+            <Container className="mt-2">
                 <Row>
                     <Col md={3}>
                         <PersonForm handleCriteriaChanged={handleCriteriaChanged} />

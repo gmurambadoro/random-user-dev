@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import {NATIONALITIES} from "../services/random-user-api";
+import {getCountryName} from "../services/helper";
 
 const PersonForm = (props) => {
     const { handleCriteriaChanged } = props;
@@ -31,12 +32,12 @@ const PersonForm = (props) => {
             <Form.Group>
                 <Form.Label>Country:</Form.Label>
                 <Form.Control as={"select"} value={country} onChange={event => setCountry(event.target.value)}>
-                    {nationalities.map(nationality => <option key={nationality} value={nationality}>{nationality}</option> )}
+                    {nationalities.map(nationality => <option key={nationality} value={nationality}>{getCountryName(nationality)}</option> )}
                 </Form.Control>
             </Form.Group>
 
             <Form.Group>
-                <Button type={"submit"} variant={"success"}>Generate</Button>
+                <Button type={"submit"} variant={"success"} className="btn-block">Search / Refresh</Button>
             </Form.Group>
         </Form>
     );

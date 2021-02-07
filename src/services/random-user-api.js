@@ -3,10 +3,12 @@ import queryString from "query-string";
 
 export const NATIONALITIES = 'AU, BR, CA, CH, DE, DK, ES, FI, FR, GB, IE, IR, NO, NL, NZ, TR, US'.split(', ');
 
+const CORS_ENABLE = false; // use this flag to enable/disable cors - this is just a workaround
+
 const CORS_HEROKU_BASE_URL = 'https://cors-anywhere.herokuapp.com/';
 
 const instance = axios.create({
-    baseURL: `${CORS_HEROKU_BASE_URL}https://randomuser.me/api/`,
+    baseURL: `${CORS_ENABLE ? CORS_HEROKU_BASE_URL : ''}https://randomuser.me/api/`,
     headers: {
         'Access-Control-Allow-Origin': '*',
     },
