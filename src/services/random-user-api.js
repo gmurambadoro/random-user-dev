@@ -18,7 +18,7 @@ export const randomPerson = async (params = {}) => {
     return instance.get(`/?${queryString.stringify(params)}&noinfo`)
         .then(response => response.data)
         .then(data => {
-            const {results = {}} = data;
+            const {results = []} = data;
 
             return results[0] || {};
         }
